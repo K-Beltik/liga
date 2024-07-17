@@ -1,11 +1,16 @@
-package com.bookmap;
+package com.liga;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import com.liga.orsr.ORSRParser;
+
+import java.io.IOException;
 
 public class App {
 
     public static void main(String[] args) {
-
+        try {
+            ORSRParser.parseFiveK();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
