@@ -23,7 +23,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CourtParser extends Thread {
-    private int courtId;
+    private final int courtId;
     private static Logger logger = LoggerFactory.getLogger(ORSRParser.class);
     private final String REGEX_ENTRY_DATE = "Date of entry:\\\\n(.+?)\\\\n";
     private final String REGEX_DELETION_DATE = "Date of deletion:\\\\n(.+?)\\\\n";
@@ -100,7 +100,7 @@ public class CourtParser extends Thread {
     private String buildLegalEntityJson(Document doc) {
         JSONObject jsonParentObject = new JSONObject();
         for (Element table : doc.select("table[bgcolor=#ffffff]")) {
-            //taking field name Fom first column
+            //taking field name from first column
             String field = table.select("tr").first().select("td").first().text();
             //next iterate trhought all  subitems
             List<JSONObject> innerObjects = new ArrayList<>();
