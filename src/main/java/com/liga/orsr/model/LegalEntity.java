@@ -18,6 +18,20 @@ public class LegalEntity {
         return identificationNumber;
     }
 
+    @Override
+    public String toString() {
+        return "LegalEntity{" +
+                "identificationNumber=" + identificationNumber +
+                ", insertNumber='" + insertNumber + '\'' +
+                ", court='" + court + '\'' +
+                ", businessName='" + businessName + '\'' +
+                ", registeredAddress='" + registeredAddress + '\'' +
+                ", entryDate=" + entryDate +
+                ", deletionDate=" + deletionDate +
+                ", legalForm='" + legalForm + '\'' +
+                '}';
+    }
+
     public void setIdentificationNumber(Long identificationNumber) {
         this.identificationNumber = identificationNumber;
     }
