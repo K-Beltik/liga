@@ -10,7 +10,6 @@ public class LegalEntity {
     String businessName;
     String registeredAddress;
     LocalDate entryDate;
-    LocalDate deletionDate;
     String legalForm;
     String jsonAllOtherInfo;
 
@@ -27,7 +26,6 @@ public class LegalEntity {
                 ", businessName='" + businessName + '\'' +
                 ", registeredAddress='" + registeredAddress + '\'' +
                 ", entryDate=" + entryDate +
-                ", deletionDate=" + deletionDate +
                 ", legalForm='" + legalForm + '\'' +
                 '}';
     }
@@ -74,14 +72,6 @@ public class LegalEntity {
 
     public void setEntryDate(LocalDate entryDate) {
         this.entryDate = entryDate;
-    }
-
-    public LocalDate getDeletionDate() {
-        return deletionDate;
-    }
-
-    public void setDeletionDate(LocalDate deletionDate) {
-        this.deletionDate = deletionDate;
     }
 
     public String getLegalForm() {
