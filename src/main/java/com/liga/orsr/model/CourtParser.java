@@ -45,7 +45,7 @@ public class CourtParser extends Thread {
                 timezone(Timezone.EUROPE_KIEV).build());
         String baseUri;
         int exceptionsCount = 0;
-        try (FileWriter fw = new FileWriter("All_Companies_From_orsr.sk.courtId." + courtId + ".txt", true);
+        try (FileWriter fw = new FileWriter("orsr.sk.courtId." + courtId + ".txt", true);
              BufferedWriter bw = new BufferedWriter(fw);
              PrintWriter out = new PrintWriter(bw))
         {
