@@ -1,0 +1,8 @@
+CREATE INDEX interest_entity_secondary_idx
+ON ooc_statement(interestedparty_describedbyentitystatement);
+CREATE INDEX subject_entity_secondary_idx
+ON ooc_statement(subject_describedbyentitystatement);
+CREATE UNIQUE INDEX persona_id_idx
+ON ukranians(Person_ID);
+CREATE UNIQUE INDEX entity_statement_idx
+ON entity_statement(statementid);
