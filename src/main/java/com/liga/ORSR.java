@@ -4,7 +4,7 @@ import com.liga.orsr.ORSRParser;
 
 import java.io.IOException;
 
-public class App {
+public class ORSR {
 
     public static void main(String[] args) {
         try {

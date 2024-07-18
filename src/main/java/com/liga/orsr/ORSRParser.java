@@ -1,6 +1,5 @@
 package com.liga.orsr;
 
-import com.liga.orsr.model.CourtParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

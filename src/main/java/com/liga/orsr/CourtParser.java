@@ -1,6 +1,7 @@
-package com.liga.orsr.model;
+package com.liga.orsr;
 
 import com.liga.orsr.ORSRParser;
+import com.liga.orsr.model.LegalEntity;
 import com.machinepublishers.jbrowserdriver.JBrowserDriver;
 import com.machinepublishers.jbrowserdriver.Settings;
 import com.machinepublishers.jbrowserdriver.Timezone;
