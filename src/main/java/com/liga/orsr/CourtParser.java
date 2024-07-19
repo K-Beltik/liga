@@ -1,10 +1,8 @@
 package com.liga.orsr;
 
-import com.liga.orsr.ORSRParser;
 import com.liga.orsr.model.LegalEntity;
-import com.machinepublishers.jbrowserdriver.JBrowserDriver;
-import com.machinepublishers.jbrowserdriver.Settings;
-import com.machinepublishers.jbrowserdriver.Timezone;
+import org.htmlunit.WebClient;
+import org.htmlunit.html.HtmlPage;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -16,6 +14,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -25,7 +24,7 @@ import java.util.regex.Pattern;
 
 public class CourtParser extends Thread {
     private final int courtId;
-    private static Logger logger = LoggerFactory.getLogger(ORSRParser.class);
+    private static Logger logger = LoggerFactory.getLogger(CourtParser.class);
     private final String REGEX_ENTRY_DATE = "Date of entry:\\\\n(.+?)\\\\n";
     private final String REGEX_DELETION_DATE = "Date of deletion:\\\\n(.+?)\\\\n";
     private final String REGEX_ID = "Identification number.+?(\\d+ \\d+ \\d+)\\\\n";
@@ -41,10 +40,9 @@ public class CourtParser extends Thread {
 
     @Override
     public void run() {
-        JBrowserDriver driver = new JBrowserDriver(Settings
-                .builder().
-                timezone(Timezone.EUROPE_KIEV).build());
-        String baseUri;
+        WebClient webClient = new WebClient();
+        webClient.getOptions().setThrowExceptionOnScriptError(false);
+        URL baseUri;
         int exceptionsCount = 0;
         try (FileWriter fw = new FileWriter("orsr.sk.courtId." + courtId + ".txt", true);
              BufferedWriter bw = new BufferedWriter(fw);
@@ -52,10 +50,9 @@ public class CourtParser extends Thread {
         {
             for (int id = 1; id <= 700; id++) {
                 try {
-                    baseUri = "https://www.orsr.sk/vypis.asp?lan=en&ID="+ id + "&SID="+ courtId + "&P=1";
-                    driver.get(baseUri);
-                    String loadedPage = driver.getPageSource();
-                    Document doc = Jsoup.parse(loadedPage);
+                    baseUri = new URL("https://www.orsr.sk/vypis.asp?lan=en&ID="+ id + "&SID="+ courtId + "&P=1");
+                    HtmlPage page = webClient.getPage(baseUri);
+                    Document doc = Jsoup.parse(page.asXml());
                     JSONObject dataToStore = new JSONObject(buildLegalEntity(doc));
                     out.println(dataToStore);
                     if (id % 70 == 0){
@@ -69,7 +66,7 @@ public class CourtParser extends Thread {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        driver.quit();
+        webClient.close();
         throw new RuntimeException("Exception count in this thread was: " + exceptionsCount + " from 700 id's");
     }
 
