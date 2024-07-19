@@ -1,4 +1,5 @@
 # Test task #3 for LZ
+I've downloaded SQLite dump and all the following manipulations were performed in it. I decided to go this way to avoid uploading gigabytes of data to Git.
 1. First we fill Ukrainians Surnames in a separate table to catch Ukrainians with non-UA citizenship. DB_ukrain_surnames_create.sql file takes care of that. This way we get around 2500 Ukrainians with non-UA citizenship. 
 2. Then we fill separate table called Ukrainians with a query in file DB_Select_All_Persons.sql. I'm intentionally excluding all people with ru citizenship.
 3. So far we were good using database as is, but from now on we start experience significant performance issues. ID field used in next join operation consist number with 17-20 symbols recorded as string, which is bad idea as for id field. So, we will need to add indexes, cause single query can take now 240-600 seconds, which is not acceptable. We do it in SQL file DB_Add_Indexes.sql This helped to decrease response time for a sample query from 240 seconds to <1 second.
