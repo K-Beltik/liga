@@ -46,7 +46,7 @@ public class PageParser extends Thread {
         WebDriver webClient = new ChromeDriver();
         ChromeOptions options = new ChromeOptions();
         options.setProxy(proxy);
-        try (FileWriter fw = new FileWriter("Bulgaria." + counter + ".txt", true);
+        try (FileWriter fw = new FileWriter("out/Bulgaria." + counter + ".txt", true);
              BufferedWriter bw = new BufferedWriter(fw);
              PrintWriter out = new PrintWriter(bw)) {
             for (int id = counter; id < 4; id= id + threadCount) {

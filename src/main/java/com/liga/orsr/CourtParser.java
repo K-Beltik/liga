@@ -44,7 +44,7 @@ public class CourtParser extends Thread {
         webClient.getOptions().setThrowExceptionOnScriptError(false);
         URL baseUri;
         int exceptionsCount = 0;
-        try (FileWriter fw = new FileWriter("orsr.sk.courtId." + courtId + ".txt", true);
+        try (FileWriter fw = new FileWriter("out/orsr.sk.courtId." + courtId + ".txt", true);
              BufferedWriter bw = new BufferedWriter(fw);
              PrintWriter out = new PrintWriter(bw))
         {
